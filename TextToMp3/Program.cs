@@ -1,28 +1,25 @@
-﻿using System;
-using System.IO;
-using System.Speech.Synthesis;
-using System.Speech.AudioFormat;
+﻿using System.Speech.Synthesis;
 
-// Initialize a new instance of the SpeechSynthesizer.
+string mp3FilePath = @"C:\Training\TextToMp3\exportTests\test.mp3";
+
 using (SpeechSynthesizer synth = new SpeechSynthesizer())
+using (MemoryStream wavStream = new MemoryStream())
 {
 
-    // Configure the audio output.
-    synth.SetOutputToWaveFile(@"C:\Training\TextToMp3\exportTests\test.wav",
-    new SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
+    // Configure the audio output
+    synth.SetOutputToWaveStream(wavStream);
+    // Input the text to be turned into speech
+    synth.Speak("This is sample output directly to an MP3 file from a stream.");
 
-    // Build a prompt.
-    PromptBuilder builder = new PromptBuilder();
-    builder.AppendText("This is sample output to a WAVE file.");
+    // Reset the position of the stream to the beginning before conversion
+    wavStream.Position = 0;
 
-    // Speak the prompt.
-    synth.Speak(builder);
+    // Convert WAV stream to MP3 and save it to file
+    WavToMp3.ConvertWavStreamToMp3(wavStream, mp3FilePath);
 
 }
 
-Console.WriteLine();
-Console.WriteLine("Press any key to exit...");
-Console.ReadKey();
+Console.WriteLine("MP3 file generated.");
 
 
 

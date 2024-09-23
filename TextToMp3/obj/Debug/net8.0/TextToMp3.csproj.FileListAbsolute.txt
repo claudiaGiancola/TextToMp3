@@ -17,3 +17,12 @@ C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\TextToMp3.pdb
 C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\TextToMp3.genruntimeconfig.cache
 C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\ref\TextToMp3.dll
 C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\TextToMp3.sourcelink.json
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\libmp3lame.32.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\libmp3lame.64.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.Asio.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.Core.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.Lame.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.Midi.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.Wasapi.dll
+C:\Training\TextToMp3\TextToMp3\bin\Debug\net8.0\NAudio.WinMM.dll
