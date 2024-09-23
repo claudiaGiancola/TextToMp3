@@ -16,3 +16,4 @@ C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\refint\TextToMp3.dll
 C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\TextToMp3.pdb
 C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\TextToMp3.genruntimeconfig.cache
 C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\ref\TextToMp3.dll
+C:\Training\TextToMp3\TextToMp3\obj\Debug\net8.0\TextToMp3.sourcelink.json
