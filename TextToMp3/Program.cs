@@ -1,6 +1,6 @@
 ﻿using System.Speech.Synthesis;
 
-string mp3FilePath = @"C:\Training\TextToMp3\exportTests\test2.mp3";
+string mp3FilePath = @"C:\Training\TextToMp3\exportTests\testExternalFile.mp3";
 
 using (SpeechSynthesizer synth = new SpeechSynthesizer())
 using (MemoryStream wavStream = new MemoryStream())
@@ -10,7 +10,7 @@ using (MemoryStream wavStream = new MemoryStream())
     synth.SetOutputToWaveStream(wavStream);
     // Input the text to be turned into speech
     synth.SelectVoice("Microsoft Zira Desktop");
-    synth.Speak("This is sample output directly to an MP3 file from a stream.");
+    synth.Speak(InputFile.GetInputFile());
 
     // Reset the position of the stream to the beginning before conversion
     wavStream.Position = 0;
