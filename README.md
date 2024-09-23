@@ -5,6 +5,8 @@ Input your text file to convert and download it as mp3.
 
 Please always verify you own the rights of the text file or the file's author gave you the permission to convert it before using this application.
 
+Run the program with `dotnet run`.
+
 
 ### Installing System.Speech
 
@@ -13,3 +15,10 @@ Run `dotnet add package System.Speech --version 8.0.0` in the CLI
 This provides APIs for speech recognition and synthesis built on the Microsoft Speech API in Windows. It's not supported on other platforms.
 
 This package is provided primarily for compatibility with code being ported from .NET Framework and is not accepting new features.
+
+### Voices
+
+List the available installed voices adding in Program.cs the line `Voices.GetVoices();`.
+Use your preferred voice updating this line  `synth.SelectVoice("<your preferred voice name>");`.
+
+You can download additional voices (if available) in your Windows Language Settings > Preferred Languages.

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TextToMp3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1cd294f281d88def7b3c5cde59a813c01e86216e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a06e813360e24e7c85a523b7e7a369e9ebe5c64")]
 [assembly: System.Reflection.AssemblyProductAttribute("TextToMp3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TextToMp3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

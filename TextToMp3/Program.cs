@@ -9,7 +9,7 @@ using (MemoryStream wavStream = new MemoryStream())
     // Configure the audio output
     synth.SetOutputToWaveStream(wavStream);
     // Input the text to be turned into speech
-    synth.SelectVoice("Microsoft Zira Desktop");
+    synth.SelectVoice("Microsoft Elsa Desktop");
     synth.Speak(InputFile.GetInputFile());
 
     // Reset the position of the stream to the beginning before conversion
