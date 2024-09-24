@@ -1,6 +1,6 @@
 ﻿using System.Speech.Synthesis;
 
-string mp3FilePath = @"C:\Training\TextToMp3\exportTests\test4.mp3";
+string mp3FilePath = @"C:\Training\TextToMp3\exportTests\MartelloDelSoleTest.mp3";
 
 using (SpeechSynthesizer synth = new SpeechSynthesizer())
 using (MemoryStream wavStream = new MemoryStream())

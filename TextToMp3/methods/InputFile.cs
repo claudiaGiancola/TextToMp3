@@ -1,8 +1,15 @@
-class InputFile {
+using Aspose.Words;
 
-    public static string GetInputFile() {
+class InputFile
+{
 
-        string text= File.ReadAllText(@"C:\Training\TextToMp3\exportTests\text.txt");
+    public static string GetInputFile()
+    {
+
+        var doc = new Document(@"C:\Users\ClaGia\Downloads\Martello del Sole Compendio I.docx");
+        doc.Save(@"C:\Training\TextToMp3\exportTests\Martello del Sole Compendio I.txt");
+
+        string text = File.ReadAllText(@"C:\Training\TextToMp3\exportTests\Martello del Sole Compendio I.txt");
 
         return text;
 

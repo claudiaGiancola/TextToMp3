@@ -43,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Aspose.Words": {
+              "target": "Package",
+              "version": "[24.9.0, )"
+            },
             "NAudio": {
               "target": "Package",
               "version": "[2.2.1, )"
