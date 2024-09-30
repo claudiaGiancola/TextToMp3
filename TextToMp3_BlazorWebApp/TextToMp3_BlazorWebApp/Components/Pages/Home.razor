@@ -1,9 +1,21 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Text To Mp3</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Text To Mp3</h1>
 
-Welcome to your new app.
+Turn your document into an mp3 audio file.
 
-<Counter IncrementAmount="10"/>
+<form @onsubmit={}>
+    <div>
+    <label>Insert a title for your new file</label>
+    <input type="text" @/>
+    </div>
+
+    <div>
+    <label></label>
+    <input type="file" @/>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
