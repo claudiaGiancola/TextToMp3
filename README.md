@@ -1,11 +1,11 @@
-# Intro
+# Text to Mp3
 
-This is a console application.
-Input your text file to convert and download it as mp3.
+This is a Blazor Web App.
+Input your docx file to convert and download it as mp3.
 
 Please always verify you own the rights of the text file or the file's author gave you the permission to convert it before using this application.
 
-Run the program with `dotnet run`
+Run the program with `dotnet watch`
 
 
 ### Dependencies
