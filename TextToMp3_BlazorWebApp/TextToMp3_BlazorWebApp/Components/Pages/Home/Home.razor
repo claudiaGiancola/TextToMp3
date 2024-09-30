@@ -1,4 +1,8 @@
 ﻿@page "/"
+@using System.Speech.Synthesis;
+@using Aspose.Words;
+@using NAudio.Lame;
+@using NAudio.Wave;
 
 <PageTitle>Text To Mp3</PageTitle>
 
@@ -6,16 +10,67 @@
 
 Turn your document into an mp3 audio file.
 
-<form>
+<form @onsubmit="DownloadAudio">
     <div>
-    <label>Insert a title for your new file</label>
-    <input type="text" @/>
+        <label>Insert a title for your new file</label>
+        <input type="text" @onchange="UpdateInputFile" placeholder="your audio" @ />
     </div>
 
     <div>
-    <label></label>
-    <input type="file" @/>
+        <label></label>
+        <input type="file" @ />
     </div>
 
     <button type="submit">Submit</button>
 </form>
+
+@code {
+
+    string OutputFile = "your audio";
+
+    private void UpdateInputFile(ChangeEventArgs e) {
+        OutputFile = (string)e.Value!;
+    }
+
+    public string GetInputFile() {
+        var doc = new Document(@$"C:\Users\ClaGia\Downloads\Martello del Sole Compendio I.docx");
+
+        string text = doc.ToString(SaveFormat.Text).Trim().Replace("Created with an evaluation copy of Aspose.Words. To remove all limitations, you can use Free Temporary License https://products.aspose.com/words/temporary-license/", "").Replace("Evaluation Only. Created with Aspose.Words. Copyright 2003-2024 Aspose Pty Ltd.", "");
+
+        return text;
+    }
+
+    public void ConvertWavStreamToMp3(Stream wavStream, string mp3FilePath) {
+        using (var reader = new WaveFileReader(wavStream)) // Read from the wave stream
+        using (var writer = new LameMP3FileWriter(mp3FilePath, reader.WaveFormat, LAMEPreset.VBR_90))
+        {
+            reader.CopyTo(writer);  // Copy WAV stream data into MP3 file
+        }
+    }
+
+    public void DownloadAudio()
+    {
+
+        string mp3FilePath = @"C:\Training\TextToMp3\TextToMp3_ConsoleApp\exportTests\MartelloDelSoleTest.mp3";
+
+        using (SpeechSynthesizer synth = new SpeechSynthesizer())
+        using (MemoryStream wavStream = new MemoryStream())
+        {
+
+            // Configure the audio output
+            synth.SetOutputToWaveStream(wavStream);
+            // Input the text to be turned into speech
+            synth.SelectVoice("Microsoft Elsa Desktop");
+            synth.Speak(GetInputFile());
+
+            // Reset the position of the stream to the beginning before conversion
+            wavStream.Position = 0;
+
+            // Convert WAV stream to MP3 and save it to file
+            ConvertWavStreamToMp3(wavStream, mp3FilePath);
+
+        }
+
+        Console.WriteLine("MP3 file generated.");
+    }
+}
