@@ -10,37 +10,72 @@
 
 Turn your document into an mp3 audio file.
 
-<form @onsubmit="DownloadAudio">
-    <div>
-        <label>Insert a title for your new file</label>
-        <input type="text" @onchange="UpdateInputFile" placeholder="your audio" @ />
-    </div>
+@* <EditForm Model="Model" OnSubmit="DownloadAudio" FormName="tts-form"> *@
+<EditForm Model="Model" OnSubmit="Test2" FormName="tts-form">
+
+    @* <div>
+        <label>Insert a title for your new file </label>
+        <InputText placeholder="your audio" @bind-Value="Model!.OutputFile" />
+    </div> *@
+
+    <label></label>
+    <InputText placeholder="your audio" @bind-Value="Model!.OutputFile"></InputText>
 
     <div>
-        <label></label>
-        <input type="file" @ />
+        <label name="docx">Please select your docx file </label>
+        <InputFile OnChange="TestMethod"/>
     </div>
 
     <button type="submit">Submit</button>
-</form>
+</EditForm>
+
+<p>You have inserted @Model!.InputFile as input and @Model.OutputFile as output</p>
+
+@* <form method="post" @onsubmit="DownloadAudio" @formname="text-to-mp3-form">
+    <div>
+        <label for="title">Insert a title for your new file </label>
+        <input type="text" name="title" @oninput="UpdateInputFile" placeholder="your audio" @ />
+    </div>
+
+    <div>
+        <label name="docx">Please select your docx file </label>
+        <input type="file" name="docx" @ />
+    </div>
+
+    <button type="submit">Submit</button>
+</form> *@
 
 @code {
 
-    string OutputFile = "your audio";
+    [SupplyParameterFromForm]
+    private MyFile? Model { get; set; }
 
-    private void UpdateInputFile(ChangeEventArgs e) {
-        OutputFile = (string)e.Value!;
+    protected override void OnInitialized() => Model ??= new();
+
+    public class MyFile
+    {
+        public string? InputFile { get; set; } = null!;
+
+        public string? OutputFile { get; set; } = "your audio";
     }
 
-    public string GetInputFile() {
-        var doc = new Document(@$"C:\Users\ClaGia\Downloads\Martello del Sole Compendio I.docx");
+    public void TestMethod(InputFileChangeEventArgs e) {
+        Model!.InputFile = e.File.Name;
+    }
+
+    public void Test2() {
+        Console.WriteLine("submit clicked");
+    }
+
+    @* public string GetInputFile() { 
+        var doc = new Document(@$"C:\Users\ClaGia\Downloads\{Model!.InputFile.File.Name}.docx");
 
         string text = doc.ToString(SaveFormat.Text).Trim().Replace("Created with an evaluation copy of Aspose.Words. To remove all limitations, you can use Free Temporary License https://products.aspose.com/words/temporary-license/", "").Replace("Evaluation Only. Created with Aspose.Words. Copyright 2003-2024 Aspose Pty Ltd.", "");
 
         return text;
-    }
+    } *@
 
-    public void ConvertWavStreamToMp3(Stream wavStream, string mp3FilePath) {
+    @* public void ConvertWavStreamToMp3(Stream wavStream, string mp3FilePath) {
         using (var reader = new WaveFileReader(wavStream)) // Read from the wave stream
         using (var writer = new LameMP3FileWriter(mp3FilePath, reader.WaveFormat, LAMEPreset.VBR_90))
         {
@@ -51,7 +86,7 @@ Turn your document into an mp3 audio file.
     public void DownloadAudio()
     {
 
-        string mp3FilePath = @"C:\Training\TextToMp3\TextToMp3_ConsoleApp\exportTests\MartelloDelSoleTest.mp3";
+        string mp3FilePath = @"C:\Users\ClaGia\Downloads\" + $"{Model!.OutputFile}.mp3";
 
         using (SpeechSynthesizer synth = new SpeechSynthesizer())
         using (MemoryStream wavStream = new MemoryStream())
@@ -61,7 +96,7 @@ Turn your document into an mp3 audio file.
             synth.SetOutputToWaveStream(wavStream);
             // Input the text to be turned into speech
             synth.SelectVoice("Microsoft Elsa Desktop");
-            synth.Speak(GetInputFile());
+            synth.Speak(Model!.InputFile);
 
             // Reset the position of the stream to the beginning before conversion
             wavStream.Position = 0;
@@ -72,5 +107,5 @@ Turn your document into an mp3 audio file.
         }
 
         Console.WriteLine("MP3 file generated.");
-    }
+    } *@
 }
