@@ -13,19 +13,32 @@
 <h5>Turn your document into an mp3 audio file.</h5>
 
 <div>
+    <button @onclick="Voices.GetVoices">
+        Show available voices
+    </button>
+</div>
+
+<div>
     <EditForm Model="Model" OnSubmit="DownloadAudio" FormName="tts-form">
 
-        <label>Please type a name for your new audio file: </label>
-        <InputText placeholder="your audio" @bind-Value="Model!.OutputFile"></InputText>
+        <div>
+            <label>Please type a name for your new audio file: </label>
+            <InputText placeholder="your audio" @bind-Value="Model!.OutputFile"></InputText>
+        </div>
 
         <div>
             <label name="docx">Please select the docx file you want to convert to audio: </label>
-            <InputFile OnChange="GetInputFileName"/>
+            <InputFile OnChange="GetInputFileName" />
+        </div>
+
+        <div>
+            Select language (en/it)
         </div>
 
         <button type="submit">Submit</button>
     </EditForm>
 </div>
 
-<p>Your file @Model!.InputFile will be downloaded as "@Model.OutputFile".mp3</p>
-
+<div>
+    <p>Your file @Model!.InputFile will be downloaded as "@Model.OutputFile".mp3</p>
+</div>
