@@ -14,7 +14,7 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
 
         public class MyFile
         {
-            public string InputFile { get; set; } = null!;
+            public IBrowserFile InputFile { get; set; } = null!;
             public string OutputFile { get; set; } = "your audio";
             public string Voice { get; set; } = "Microsoft Elsa Desktop";
             public string Status { get; set; } = "";
@@ -23,14 +23,14 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
 
         public void GetInputFileName(InputFileChangeEventArgs e)
         {
-            Model!.InputFile = e.File.Name;
+            Model!.InputFile = e.File;
         }
 
         public void GetStatus() {
             Model!.Status = $"Your file {Model!.InputFile} will be downloaded as {@Model.OutputFile}.mp3";
         }
 
-        public void DownloadAudio()
+        public async void DownloadAudio()
         {
 
             string mp3FilePath = @"C:\Users\ClaGia\Downloads\" + $"{Model!.OutputFile}.mp3";
@@ -45,7 +45,9 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
                 // Input the text to be turned into speech
                 synth.SelectVoice(Model!.Voice);
 
-                synth.Speak(InputFile.GetInputFile(Model!.InputFile));
+                string textToSpeak = await InputFile.GetInputFile(Model!.InputFile);
+
+                synth.Speak(textToSpeak);
 
                 // Reset the position of the stream to the beginning before conversion
                 wavStream.Position = 0;

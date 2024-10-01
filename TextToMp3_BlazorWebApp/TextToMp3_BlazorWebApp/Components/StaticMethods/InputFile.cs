@@ -1,17 +1,35 @@
-using Aspose.Words;
+using Microsoft.AspNetCore.Components.Forms;
+using DocumentFormat.OpenXml.Packaging;
+using System.Text;
 
 class InputFile
 {
 
-    public static string GetInputFile(string inputFile)
+    public static async Task<string> GetInputFile(IBrowserFile inputFile)
     {
+        StringBuilder textContent = new StringBuilder();
 
-        var doc = new Document(@$"C:\Users\ClaGia\Downloads\{inputFile}");
+        // Use a MemoryStream to copy the async stream into it
+        using (var memoryStream = new MemoryStream())
+        {
+            // Copy the input file's async stream to memory stream
+            await inputFile.OpenReadStream(maxAllowedSize: 10485760).CopyToAsync(memoryStream);
 
-        string text = doc.ToString(SaveFormat.Text).Trim().Replace("Created with an evaluation copy of Aspose.Words. To remove all limitations, you can use Free Temporary License https://products.aspose.com/words/temporary-license/", "").Replace("Evaluation Only. Created with Aspose.Words. Copyright 2003-2024 Aspose Pty Ltd.", "");
+            // Reset the memory stream's position to the beginning
+            memoryStream.Position = 0;
 
-        return text;
+            // Open the document from the memory stream for synchronous read operations
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(memoryStream, false))
+            {
+                // Extract the main document part
+                var body = doc.MainDocumentPart.Document.Body;
 
+                // Get all the text from the document
+                textContent.Append(body.InnerText);
+            }
+        }
+
+        return textContent.ToString();
     }
 
 }
