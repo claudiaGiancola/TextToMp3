@@ -10,10 +10,11 @@ class InputFile
         StringBuilder textContent = new StringBuilder();
 
         // Use a MemoryStream to copy the async stream into it
-        using (var memoryStream = new MemoryStream())
+        using (MemoryStream memoryStream = new MemoryStream())
         {
             // Copy the input file's async stream to memory stream
-            await inputFile.OpenReadStream(maxAllowedSize: 10485760).CopyToAsync(memoryStream);
+            // maxAllowedSize: 1MB
+            await inputFile.OpenReadStream(maxAllowedSize: 1048576).CopyToAsync(memoryStream);
 
             // Reset the memory stream's position to the beginning
             memoryStream.Position = 0;
@@ -22,7 +23,7 @@ class InputFile
             using (WordprocessingDocument doc = WordprocessingDocument.Open(memoryStream, false))
             {
                 // Extract the main document part
-                var body = doc.MainDocumentPart.Document.Body;
+                DocumentFormat.OpenXml.Wordprocessing.Body body = doc.MainDocumentPart!.Document.Body!;
 
                 // Get all the text from the document
                 textContent.Append(body.InnerText);
