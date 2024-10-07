@@ -7,6 +7,8 @@ Please always verify you own the rights of the text file or the file's author ga
 
 Run the program with `dotnet watch`
 
+The new mp3 files are saved by default in the "Exports" folder of this application (<YourPath>/TextToMp3/Exports)
+
 
 ### Dependencies
 
