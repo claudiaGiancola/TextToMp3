@@ -33,7 +33,7 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
         public async void DownloadAudio()
         {
 
-            string mp3FilePath = @"C:\Users\ClaGia\Downloads\" + $"{Model!.OutputFile}.mp3";
+            string outFileName = $"../../Exports/{Model!.OutputFile}.mp3";
 
             using (SpeechSynthesizer synth = new SpeechSynthesizer())
             using (MemoryStream wavStream = new MemoryStream())
@@ -53,7 +53,7 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
                 wavStream.Position = 0;
 
                 // Convert WAV stream to MP3 and save it to file
-                WavToMp3.ConvertWavStreamToMp3(wavStream, mp3FilePath);
+                WavToMp3.ConvertWavStreamToMp3(wavStream, outFileName);
 
             }
 
