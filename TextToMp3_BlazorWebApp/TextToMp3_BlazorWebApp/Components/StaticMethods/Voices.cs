@@ -1,7 +1,7 @@
 using System.Speech.AudioFormat;
 using System.Speech.Synthesis;
 
-class Voices
+public class Voices
 {
     public static void GetVoices()
     {

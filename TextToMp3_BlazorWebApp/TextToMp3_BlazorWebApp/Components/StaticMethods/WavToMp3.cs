@@ -2,7 +2,7 @@
 using NAudio.Lame;
 using NAudio.Wave;
 
-class WavToMp3
+public class WavToMp3
 {
     public static void ConvertWavStreamToMp3(Stream wavStream, string outFileName)
     {

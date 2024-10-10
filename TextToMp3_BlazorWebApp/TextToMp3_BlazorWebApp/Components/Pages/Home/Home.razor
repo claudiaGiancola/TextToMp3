@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Speech.Synthesis
 @rendermode InteractiveServer
 
 <PageTitle>Text To Mp3</PageTitle>
@@ -15,45 +16,58 @@
 
     </div>
 
-    <div class="row gx-0">
-        <div class="col-md-8 col-12">
-            <div class="box">
-                <EditForm Model="Model" OnSubmit="DownloadAudio" FormName="tts-form">
 
-                    <div>
-                        <label class="form-label">Please type a name for your new audio file: </label>
-                        <InputText placeholder="your audio" class="form-control" @bind-Value="Model!.OutputFile">
-                        </InputText>
-                    </div>
-
-                    <div>
-                        <label name="docx" class="form-label">Please select the docx file you want to convert to audio:
-                        </label>
-                        <InputFile OnChange="GetInputFileName" class="form-control" />
-                    </div>
-
-                    <button type="submit">Submit</button>
-                </EditForm>
-            </div>
-        </div>
-
+    <div class="row">
         <div class="col">
-            <div class="box">
-                <div>
-                    Select language (en/it)
-                </div>
+            <EditForm Model="Model" OnSubmit="DownloadAudio" FormName="tts-form">
+                <div class="row gx-0">
+                    <div class="col-md-8 col-12">
+                        <div class="box">
+                            <div>
+                                <label class="form-label">Please type a name for your new audio file: </label>
+                                <InputText placeholder="your audio" class="form-control"
+                                    @bind-Value="Model!.OutputFile">
+                                </InputText>
+                            </div>
 
-                <button @onclick="Voices.GetVoices">
-                    Show available voices
-                </button>
-            </div>
+                            <div>
+                                <label name="docx" class="form-label">Please select the docx file you want to convert to
+                                    audio:
+                                </label>
+                                <InputFile OnChange="GetInputFileName" class="form-control" />
+                            </div>
+
+                            <div>
+                                <label name="voice" class="form-label">Language and Voice:
+                                </label>
+                            <InputSelect class="form-select" @bind-Value="Model!.Voice">
+                                @using (SpeechSynthesizer synth = new SpeechSynthesizer())
+                                @foreach (InstalledVoice voice in synth.GetInstalledVoices()) {
+                                    <option value="@voice.VoiceInfo.Name">@voice.VoiceInfo.Name (@voice.VoiceInfo.Culture)</option>
+                                }
+                            </InputSelect>
+                            </div>
+
+                            <div>
+                                <button type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="box">
+                                    <p>Your file "@Model!.InputFile" will be downloaded as "@(Model.OutputFile + ".mp3")"</p>                 
+                        </div>
+                    </div>
+                </div>
+            </EditForm>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             <div class="box">
-                <p>Your file "@Model!.InputFile" will be downloaded as "@(Model.OutputFile + ".mp3")"</p>
+                Loading to be added here.
             </div>
         </div>
     </div>

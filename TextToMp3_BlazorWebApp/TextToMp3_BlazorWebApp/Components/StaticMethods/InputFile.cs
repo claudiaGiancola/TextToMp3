@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using DocumentFormat.OpenXml.Packaging;
 using System.Text;
 
-class InputFile
+public class InputFile
 {
 
     public static async Task<string> GetInputFile(IBrowserFile inputFile)
