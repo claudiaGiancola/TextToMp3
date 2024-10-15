@@ -4,7 +4,7 @@
 
 <PageTitle>Text To Mp3</PageTitle>
 
-<div class="container" id="main-container">
+<div class="container d-flex flex-column align-items-center" id="main-container">
 
     <div class="row" id="titles">
         <div class="col">
@@ -16,58 +16,47 @@
 
     </div>
 
-    <div class="row">
+    <div class="row" id="form">
         <div class="col">
             <EditForm Model="Model" OnSubmit="DownloadAudio" FormName="tts-form">
-                <div class="row gx-0">
-                    <div class="col-md-8 col-12" id="form">
-                        <div>
-                            <div>
-                                <label class="form-label">Please type a name for your new audio file: </label>
-                                <InputText placeholder="your audio" class="form-control"
-                                    @bind-Value="Model!.OutputFile">
-                                </InputText>
-                            </div>
+                <div>
+                    <label class="form-label">Please type a name for your new audio file: </label>
+                    <InputText placeholder="your audio" class="form-control" @bind-Value="Model!.OutputFile">
+                    </InputText>
+                </div>
 
-                            <div>
-                                <label name="docx" class="form-label">Please select the docx file you want to convert to
-                                    audio:
-                                </label>
-                                <InputFile OnChange="GetInputFileName" class="form-control" />
-                            </div>
+                <div>
+                    <label name="docx" class="form-label">Please select the docx file you want to convert to
+                        audio:
+                    </label>
+                    <InputFile OnChange="GetInputFileName" class="form-control" />
+                </div>
 
-                            <div>
-                                <label name="voice" class="form-label">Language and Voice:
-                                </label>
-                            <InputSelect class="form-select" @bind-Value="Model!.Voice">
-                                @using (SpeechSynthesizer synth = new SpeechSynthesizer())
-                                @foreach (InstalledVoice voice in synth.GetInstalledVoices()) {
-                                    <option value="@voice.VoiceInfo.Name">@voice.VoiceInfo.Name (@voice.VoiceInfo.Culture)</option>
-                                }
-                            </InputSelect>
-                            </div>
+                <div>
+                    <label name="voice" class="form-label">Language and Voice:
+                    </label>
+                    <InputSelect class="form-select" @bind-Value="Model!.Voice">
+                        @using (SpeechSynthesizer synth = new SpeechSynthesizer())
+                            @foreach (InstalledVoice voice in synth.GetInstalledVoices())
+                            {
+                                <option value="@voice.VoiceInfo.Name">@voice.VoiceInfo.Name (@voice.VoiceInfo.Culture)
+                                </option>
+                            }
+                    </InputSelect>
+                </div>
 
-                            <div>
-                                <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="d-flex flex-row justify-content-center align-items-center" id="submit-section">
+                    <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
 
-                    <div class="col">
-                        <div class="box">
-                                    <p>Your file "@Model!.InputFile" will be downloaded as "@(Model.OutputFile + ".mp3")"</p>                 
-                        </div>
-                    </div>
+                    <p id="recap">Your file "@Model!.InputFile" will be downloaded as "@(Model.OutputFile + ".mp3")"</p>
                 </div>
             </EditForm>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="loading">
         <div class="col">
-            <div class="box">
-                Loading to be added here.
-            </div>
+            Loading to be added here.
         </div>
     </div>
 
