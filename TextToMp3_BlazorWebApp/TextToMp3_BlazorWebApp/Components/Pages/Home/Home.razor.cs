@@ -18,8 +18,7 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
             public string InputFileName { get; set; } = null!;
             public string OutputFile { get; set; } = "your audio";
             public string Voice { get; set; } = "Microsoft Elsa Desktop";
-            public string Status { get; set; } = "Please select a file";
-
+            public bool IsLoading { get; set; } = false;
         }
 
         public void GetInputFileName(InputFileChangeEventArgs e)
@@ -28,12 +27,9 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
             Model!.InputFileName = e.File.Name;
         }
 
-        public void GetStatus() {
-            Model!.Status = $"Your file {Model.InputFile.Name} will be downloaded as {Model.OutputFile}.mp3";
-        }
-
         public async void DownloadAudio()
         {
+            Model!.IsLoading = true;
 
             string outFileName = $"../../Exports/{Model!.OutputFile}.mp3";
 
@@ -59,7 +55,7 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
 
             }
 
-            Console.WriteLine("MP3 file generated.");
+            Model!.IsLoading = false;
         }
     }
 }

@@ -49,18 +49,32 @@
                     <div class="d-flex flex-row justify-content-center align-items-center" id="submit-section">
                         <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
 
-                        <p id="recap">Your file "@Model!.InputFileName" will be downloaded as "@(Model.OutputFile + ".mp3")"
+                        <p id="recap">Your file "@Model!.InputFileName" will be downloaded as "@(Model.OutputFile +
+                            ".mp3")"
                         </p>
+
                     </div>
                 </div>
             </EditForm>
         </div>
     </div>
 
-    <div class="row" id="loading">
-        <div class="col">
-            Loading to be added here.
-        </div>
-    </div>
+    @{
+        if (Model!.IsLoading)
+        {
+            <div class="row" id="loading">
+                <div class="col">
+                    <Spinner Color="SpinnerColor.Info" Visible=true />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row" id="loading">
+                <div class="col">
+                </div>
+            </div>
+        }
+    }
 
 </div>
