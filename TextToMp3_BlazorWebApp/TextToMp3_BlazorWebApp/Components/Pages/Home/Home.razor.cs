@@ -15,19 +15,21 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
         public class MyFile
         {
             public IBrowserFile InputFile { get; set; } = null!;
+            public string InputFileName { get; set; } = null!;
             public string OutputFile { get; set; } = "your audio";
             public string Voice { get; set; } = "Microsoft Elsa Desktop";
-            public string Status { get; set; } = "";
+            public string Status { get; set; } = "Please select a file";
 
         }
 
         public void GetInputFileName(InputFileChangeEventArgs e)
         {
             Model!.InputFile = e.File;
+            Model!.InputFileName = e.File.Name;
         }
 
         public void GetStatus() {
-            Model!.Status = $"Your file {Model!.InputFile} will be downloaded as {@Model.OutputFile}.mp3";
+            Model!.Status = $"Your file {Model.InputFile.Name} will be downloaded as {Model.OutputFile}.mp3";
         }
 
         public async void DownloadAudio()
