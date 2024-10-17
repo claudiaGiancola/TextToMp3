@@ -59,12 +59,18 @@
         </div>
     </div>
 
-    <div class="row" id="loading">
-        <div class="col">
-            <div class="spinner">
-                <Spinner Color="SpinnerColor.Info" Visible=@Model!.IsLoading />
+    @{
+        if (Model!.IsLoading)
+        {
+            <div class="row">
+                <div class="col">
+                    <div class="spinner" id="loading">
+                        <Spinner Color="SpinnerColor.Info" />
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        }
+
+    }
 
 </div>
