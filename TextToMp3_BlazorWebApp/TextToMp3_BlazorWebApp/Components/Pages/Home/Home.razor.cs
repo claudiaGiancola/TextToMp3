@@ -54,8 +54,10 @@ namespace TextToMp3_BlazorWebApp.Components.Pages.Home
                 WavToMp3.ConvertWavStreamToMp3(wavStream, outFileName);
 
             }
-
+            
             Model!.IsLoading = false;
+
+            StateHasChanged();
         }
     }
 }

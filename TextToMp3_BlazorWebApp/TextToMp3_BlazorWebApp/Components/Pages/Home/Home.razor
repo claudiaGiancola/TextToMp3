@@ -59,22 +59,12 @@
         </div>
     </div>
 
-    @{
-        if (Model!.IsLoading)
-        {
-            <div class="row" id="loading">
-                <div class="col">
-                    <Spinner Color="SpinnerColor.Info" Visible=true />
-                </div>
+    <div class="row" id="loading">
+        <div class="col">
+            <div class="spinner">
+                <Spinner Color="SpinnerColor.Info" Visible=@Model!.IsLoading />
             </div>
-        }
-        else
-        {
-            <div class="row" id="loading">
-                <div class="col">
-                </div>
-            </div>
-        }
-    }
+        </div>
+    </div>
 
 </div>
